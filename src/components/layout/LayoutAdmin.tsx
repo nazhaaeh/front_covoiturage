@@ -1,6 +1,5 @@
 import { Header } from "./Header";
-import { Navigation ,MobileNavigation } from "./Navigation";
-import { adminNavigation ,MobNavigation } from "./adminNavigation";
+import { Navigation ,MobNavigation } from "./adminNavigation";
 
 
 interface LayoutProps {
@@ -20,7 +19,7 @@ export function Layout({ children, navigationComponent }: LayoutProps) {
           </div>
         </main>
       </div>
-      <MobileNavigation />
+      <MobNavigation />
     </div>
   );
 }

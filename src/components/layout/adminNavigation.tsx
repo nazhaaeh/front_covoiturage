@@ -12,14 +12,11 @@ import {
 import { cn } from "@/lib/utils";
 
 const navigationItems = [
-  { name: "Dashboard", href: "/", icon: Home },
-  { name: "Find Rides", href: "/search", icon: Search },
-  { name: "Offer Ride", href: "/create", icon: Plus },
-  { name: "My Trips", href: "/trips", icon: Calendar },
-  { name: "Messages", href: "/messages", icon: MessageCircle },
-  { name: "Reviews", href: "/reviews", icon: Star },
-  { name: "Profile", href: "/profile", icon: User },
+  { name: "Dashboard", href: "/admin", icon: Home },
+  { name: "utilisateur", href: "/utilisateur", icon: User },
 
+
+ 
 
 ];
 
@@ -77,7 +74,7 @@ export function Navigation() {
 }
 
 // Mobile Navigation
-export function MobileNavigation() {
+export function MobNavigation() {
   const quickNavItems = navigationItems.slice(0, 5); // First 5 items for mobile
 
   return (
