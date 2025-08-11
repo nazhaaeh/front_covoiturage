@@ -61,17 +61,17 @@ async function register() {
                             <Input name="Numpermit" placeholder="Numéro de permit" value={formData.Numpermit} onChange={handleChange} required />
                         </>
                     )}
-<div>
+        <div>
                         
-<Label htmlFor="Role">Rôle</Label>
+        <Label htmlFor="Role">Rôle</Label>
                         
-   <select id="role" value={formData.Role} onChange={(e) => setFormData({ ...formData, Role: e.target.value })} required className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-  {/* <option value="" aria-placeholder='Choisissez votre Role'></option> */}
-     {roles .filter((role) => role !== "Admin").map((role, index) => (
-    <option key={index} value={role}> {role}
-    </option>))} 
-    </select>
-</div>
+          <select id="role" value={formData.Role} onChange={(e) => setFormData({ ...formData, Role: e.target.value })} required className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+             {/* <option value="" aria-placeholder='Choisissez votre Role'></option> */}
+              {roles .filter((role) => role !== "Admin").map((role, index) => (
+                 <option key={index} value={role}> {role}
+                 </option>))} 
+             </select>
+    </div>
 
                   
 
