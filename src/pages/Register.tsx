@@ -40,14 +40,15 @@ async function register() {
         getRoles()
             .then(data => setRoles(data))
             .catch(error => console.error(error.message));
-    }, []);
 
+    }, []);
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-100 p-6">
             <Card className="w-full max-w-md p-6 space-y-4">
                 <h2 className="text-xl font-semibold">Inscription</h2>
 
                 <form className="space-y-4">
+                    {/* <span className="text-red-500">*</span> */}
                  <Input type="username" name="username" placeholder="Nom d'utilisateur" value={formData.username} onChange={handleChange} required />
 
                     <Input name="Nom" placeholder="Nom" value={formData.Nom} onChange={handleChange} required />
@@ -63,11 +64,12 @@ async function register() {
                     )}
 <div>
                         
-<Label htmlFor="Role">Rôle</Label>
+<Label htmlFor="Role"> <span className="text-red-500">*</span> Rôle</Label>
                         
    <select id="role" value={formData.Role} onChange={(e) => setFormData({ ...formData, Role: e.target.value })} required className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-  {/* <option value="" aria-placeholder='Choisissez votre Role'></option> */}
-     {roles .filter((role) => role !== "Admin").map((role, index) => (
+ <option value="" disabled>
+    Veuillez choisir un rôle
+  </option>     {roles .filter((role) => role !== "Admin").map((role, index) => (
     <option key={index} value={role}> {role}
     </option>))} 
     </select>

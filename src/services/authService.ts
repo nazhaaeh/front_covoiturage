@@ -2,7 +2,7 @@ const API_URL = 'https://localhost:7228/api';
 
 
 export async function registerUser(data: any) {
-  const response = await fetch(`${API_URL}/auth/DemandeProfil`, {
+  const response = await fetch(`${API_URL}/auth/register`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(data),
@@ -33,6 +33,8 @@ export async function loginUser(credentials: { email: string; password: string }
     if (!response.ok) throw new Error("Erreur login");
     return response.json();
 }
+
+
 
 export async function getRoles() {
     const response = await fetch(`${API_URL}/auth/roles`, {

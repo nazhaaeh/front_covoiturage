@@ -13,6 +13,8 @@ import Reviews from "./pages/Reviews";
 import Settings from "./pages/Settings";
 import NotFound from "./pages/NotFound";
 import Register from "./pages/Register";
+import Login from "./pages/Login";
+
 
 const queryClient = new QueryClient();
 
@@ -25,6 +27,8 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} /> 
+
           <Route path="/search" element={<SearchRides />} />
           <Route path="/create" element={<CreateTrip />} />
           <Route path="/trips" element={<MyTrips />} />
