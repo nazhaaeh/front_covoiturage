@@ -62,7 +62,7 @@ async function register() {
                             <Input name="Numpermit" placeholder="Numéro de permit" value={formData.Numpermit} onChange={handleChange} required />
                         </>
                     )}
-<div>
+        <div>
                         
 <Label htmlFor="Role"> <span className="text-red-500">*</span> Rôle</Label>
                         

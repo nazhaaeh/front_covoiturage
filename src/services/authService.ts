@@ -44,3 +44,21 @@ export async function getRoles() {
     if (!response.ok) throw new Error("Erreur lors de la récupération des rôles");
     return response.json();
 }
+
+
+ export async function updateDemandeStatus(userId: string, statusId: number) {
+  const response = await fetch(`${API_URL}/auth/UpdateDemandeStatus`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ userId, statusId }),
+  });
+
+  if (!response.ok) {
+    throw new Error("Erreur lors de la mise à jour du statut");
+  }
+
+  return await response.text(); // ou response.json() si tu renvoies un objet
+}
+
