@@ -4,7 +4,6 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
-import SearchRides from "./pages/SearchRides";
 import CreateTrip from "./pages/CreateTrip";
 import MyTrips from "./pages/MyTrips";
 import Messages from "./pages/Messages";
@@ -14,6 +13,7 @@ import Settings from "./pages/Settings";
 import NotFound from "./pages/NotFound";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
+import Home from "./pages/Home";
 
 import DashboardAdmin from "./pages/Admin/DashboardAdmin";
 import Utilisateur from "./pages/Admin/Utilisateur";
@@ -31,8 +31,6 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} /> 
-
-          <Route path="/search" element={<SearchRides />} />
           <Route path="/create" element={<CreateTrip />} />
           <Route path="/trips" element={<MyTrips />} />
           <Route path="/messages" element={<Messages />} />
@@ -41,6 +39,7 @@ const App = () => (
           <Route path="/settings" element={<Settings />} />
           <Route path="/admin" element={<DashboardAdmin />} /> 
           <Route path="/utilisateur" element={<Utilisateur />} /> 
+          <Route path="/home" element={<Home />} />
 
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

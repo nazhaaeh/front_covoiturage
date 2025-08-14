@@ -6,16 +6,14 @@ import {
   MessageCircle, 
   User,
   Calendar,
-  Star,
-  Settings
+  Star
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const navigationItems = [
-  { name: "Dashboard", href: "/", icon: Home },
-  { name: "Find Rides", href: "/search", icon: Search },
-  { name: "Offer Ride", href: "/create", icon: Plus },
-  { name: "My Trips", href: "/trips", icon: Calendar },
+  { name: "Home", href: "/home", icon: Home },
+  { name: "Proposer un trajet", href: "/create", icon: Plus },
+  { name: "Mes trajets", href: "/trips", icon: Calendar },
   { name: "Messages", href: "/messages", icon: MessageCircle },
   { name: "Reviews", href: "/reviews", icon: Star },
   { name: "Profile", href: "/profile", icon: User },
@@ -52,23 +50,7 @@ export function Navigation() {
           </ul>
         </div>
         
-        {/* Settings at bottom */}
-        <div className="px-4 pb-4">
-          <NavLink
-            to="/settings"
-            className={({ isActive }) =>
-              cn(
-                "group flex items-center px-3 py-2 text-sm font-medium rounded-lg transition-all duration-200",
-                isActive
-                  ? "bg-gradient-to-r from-primary to-secondary text-white shadow-lg"
-                  : "text-muted-foreground hover:bg-muted hover:text-foreground"
-              )
-            }
-          >
-            <Settings className="mr-3 h-5 w-5 flex-shrink-0" />
-            Settings
-          </NavLink>
-        </div>
+        
       </div>
     </nav>
   );

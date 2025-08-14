@@ -1,20 +1,13 @@
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { 
-  MapPin, 
-  Clock, 
-  Users, 
-  Star,
-  MessageCircle,
-  Phone
-} from "lucide-react";
-
+import { MapPin, Clock, Users, Star, MessageCircle, Phone } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 interface TripCardProps {
   trip: {
     id: string;
-    type: 'offered' | 'booked';
+    type: "offered" | "booked";
     driver: {
       name: string;
       avatar?: string;
@@ -27,31 +20,29 @@ interface TripCardProps {
     availableSeats?: number;
     totalSeats?: number;
     price?: number;
-    status: 'upcoming' | 'ongoing' | 'completed' | 'cancelled';
+    status: "upcoming" | "ongoing" | "completed" | "cancelled";
   };
 }
 
+
 export function TripCard({ trip }: TripCardProps) {
   const statusColors = {
-    upcoming: 'bg-primary text-primary-foreground',
-    ongoing: 'bg-warning text-warning-foreground',
-    completed: 'bg-success text-success-foreground',
-    cancelled: 'bg-destructive text-destructive-foreground',
-  };
+    upcoming: "bg-primary text-primary-foreground",
+    ongoing: "bg-warning text-warning-foreground",
+    completed: "bg-success text-success-foreground",
+    cancelled: "bg-destructive text-destructive-foreground",
+  } as const;
 
   const formatTime = (date: Date) => {
-    return date.toLocaleTimeString('en-US', { 
-      hour: 'numeric', 
-      minute: '2-digit',
-      hour12: true 
+    return date.toLocaleTimeString("en-US", {
+      hour: "numeric",
+      minute: "2-digit",
+      hour12: true,
     });
   };
-
+const navigate = useNavigate();
   const formatDate = (date: Date) => {
-    return date.toLocaleDateString('en-US', { 
-      month: 'short', 
-      day: 'numeric' 
-    });
+    return date.toLocaleDateString("en-US", { month: "short", day: "numeric" });
   };
 
   return (
@@ -62,9 +53,10 @@ export function TripCard({ trip }: TripCardProps) {
             <Avatar className="h-10 w-10">
               <AvatarImage src={trip.driver.avatar} />
               <AvatarFallback>
-                {trip.driver.name.split(' ').map(n => n[0]).join('')}
+                {trip.driver.name.split(" ").map((n) => n[0]).join("")}
               </AvatarFallback>
             </Avatar>
+
             <div>
               <div className="flex items-center space-x-2">
                 <h3 className="font-semibold text-sm">{trip.driver.name}</h3>
@@ -74,6 +66,7 @@ export function TripCard({ trip }: TripCardProps) {
                   </Badge>
                 )}
               </div>
+
               <div className="flex items-center space-x-1">
                 <Star className="h-3 w-3 fill-warning text-warning" />
                 <span className="text-xs text-muted-foreground">
@@ -82,12 +75,11 @@ export function TripCard({ trip }: TripCardProps) {
               </div>
             </div>
           </div>
-          <Badge className={statusColors[trip.status]}>
-            {trip.status}
-          </Badge>
+
+          <Badge className={statusColors[trip.status]}>{trip.status}</Badge>
         </div>
       </CardHeader>
-      
+
       <CardContent className="space-y-4">
         {/* Route */}
         <div className="space-y-2">
@@ -107,15 +99,21 @@ export function TripCard({ trip }: TripCardProps) {
           <div className="flex items-center space-x-4">
             <div className="flex items-center space-x-1">
               <Clock className="h-4 w-4" />
-              <span>{formatDate(trip.datetime)} at {formatTime(trip.datetime)}</span>
+              <span>
+                {formatDate(trip.datetime)} at {formatTime(trip.datetime)}
+              </span>
             </div>
+
             {trip.availableSeats !== undefined && (
               <div className="flex items-center space-x-1">
                 <Users className="h-4 w-4" />
-                <span>{trip.availableSeats}/{trip.totalSeats} seats</span>
+                <span>
+                  {trip.availableSeats}/{trip.totalSeats} seats
+                </span>
               </div>
             )}
           </div>
+
           {trip.price && (
             <span className="font-semibold text-primary">${trip.price}</span>
           )}
@@ -123,8 +121,8 @@ export function TripCard({ trip }: TripCardProps) {
 
         {/* Actions */}
         <div className="flex space-x-2 pt-2">
-          <Button size="sm" className="flex-1">
-            <MessageCircle className="h-4 w-4 mr-2" />
+          <Button size="sm" className="flex-1"  onClick={() => navigate("/messages")}>
+            <MessageCircle className="h-4 w-4 mr-2"/>
             Message
           </Button>
           <Button size="sm" variant="outline">

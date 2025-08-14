@@ -1,5 +1,5 @@
 import { Header } from "./Header";
-import { Navigation ,MobNavigation } from "./AdminNavigation";
+import { Navigation ,MobNavigation } from "./adminNavigation";
 
 
 interface LayoutProps {

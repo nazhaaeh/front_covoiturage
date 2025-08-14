@@ -61,4 +61,3 @@ export async function getRoles() {
 
   return await response.text(); // ou response.json() si tu renvoies un objet
 }
-
