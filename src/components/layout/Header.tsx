@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { 
   Bell, 
@@ -19,10 +20,34 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
+import { getUserById } from "@/services/conducteurService";
 
 export function Header() {
   const [searchQuery, setSearchQuery] = useState("");
   const [notifications] = useState(3); // Mock notification count
+  const [user, setUser] = useState<any>(null);
+  const navigate = useNavigate();
+
+  // Récupère l'utilisateur connecté depuis l'API
+  useEffect(() => {
+    const id = localStorage.getItem("userId");
+    if (id) {
+      getUserById(id)
+        .then((data) => setUser(data))
+        .catch((err) => console.error(err));
+    }
+  }, []);
+
+  const handleProfile = () => {
+    navigate("/profile"); // redirection vers la page Profil
+  };
+
+  const handleLogout = () => {
+    // Supprime les infos de session
+    localStorage.removeItem("userId");
+    localStorage.removeItem("role");
+    navigate("/login"); // redirection vers Login
+  };
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -80,12 +105,12 @@ export function Header() {
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-56">
-              <DropdownMenuLabel>John Doe</DropdownMenuLabel>
-              <DropdownMenuLabel className="text-sm font-normal text-muted-foreground">
-                Computer Science Student
+               <DropdownMenuLabel className="text-lg font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                {user ? `${user.prenom} ${user.nom}` : "Utilisateur"}
               </DropdownMenuLabel>
+             
               <DropdownMenuSeparator />
-              <DropdownMenuItem>
+              <DropdownMenuItem onClick={handleProfile}>
                 <User className="mr-2 h-4 w-4" />
                 Profile
               </DropdownMenuItem>
@@ -94,7 +119,7 @@ export function Header() {
                 Settings
               </DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem className="text-destructive">
+              <DropdownMenuItem onClick={handleLogout} className="text-destructive">
                 <LogOut className="mr-2 h-4 w-4" />
                 Log out
               </DropdownMenuItem>

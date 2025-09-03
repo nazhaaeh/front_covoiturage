@@ -3,9 +3,9 @@ import Home from "./Home";
 
 const Index = () => {
   return (
-    <Layout>
-      <Home />
-    </Layout>
+    
+      <Home/>
+   
   );
 };
 

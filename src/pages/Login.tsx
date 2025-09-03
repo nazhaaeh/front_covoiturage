@@ -5,6 +5,7 @@ import { Card } from "@/components/ui/card";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { loginUser } from "@/services/authService";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const [formData, setFormData] = useState({
@@ -12,17 +13,33 @@ export default function Login() {
     password: "",
   });
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
+  const navigate = useNavigate();
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleLogin = async () => {
     try {
       const result = await loginUser(formData);
+
       toast.success("Connexion réussie !");
-      console.log("Données reçues :", result); // Pour debug
+      console.log("Données reçues :", result);
+
+      // Stocker en localStorage si tu veux garder la session
+      localStorage.setItem("userId", result.userId);
+      localStorage.setItem("role", result.role);
+      localStorage.setItem("nom", result.nom);
+      localStorage.setItem("prenom", result.prenom);
+
+
+
+      // Redirection selon le rôle
+        if (result.role === "Conducteur") {
+      navigate("/home");   // page du conducteur
+    } else if (result.role === "Passager") {
+      navigate("/createTrip");   // page pour créer un trajet
+    } 
     } catch (error: any) {
       toast.error("Échec de connexion : " + error.message);
     }
@@ -56,7 +73,6 @@ export default function Login() {
         </Button>
       </Card>
 
-      {/* Notifications */}
       <ToastContainer position="top-right" autoClose={3000} hideProgressBar />
     </div>
   );
